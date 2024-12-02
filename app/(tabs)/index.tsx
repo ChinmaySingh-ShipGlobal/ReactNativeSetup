@@ -1,26 +1,25 @@
-import { View, StyleSheet } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { type ImageSource } from "expo-image";
-
-import Button from "@/components/Button";
-import ImageViewer from "@/components/ImageViewer";
-import IconButton from "@/components/IconButton";
-import CircleButton from "@/components/CircleButton";
-import EmojiPicker from "@/components/EmojiPicker";
-import EmojiList from "@/components/EmojiList";
-
-import EmojiSticker from "@/components/EmojiSticker";
-
-const PlaceholderImage = require("@/assets/image.png");
+import { View, StyleSheet } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import Button from "@/components/Button";
+import EmojiList from "@/components/EmojiList";
+import IconButton from "@/components/IconButton";
+import EmojiPicker from "@/components/EmojiPicker";
+import ImageViewer from "@/components/ImageViewer";
+import EmojiSticker from "@/components/EmojiSticker";
+import CircleButton from "@/components/CircleButton";
+
+const PlaceholderImage = require("@/assets/image.png");
+
 export default function Index() {
+  const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     undefined
   );
-  const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<ImageSource | undefined>(
     undefined
   );
@@ -31,7 +30,6 @@ export default function Index() {
       allowsEditing: true,
       quality: 1,
     });
-
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
